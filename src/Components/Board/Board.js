@@ -12,11 +12,13 @@ export default class Board extends Component {
 
   changePlayer(i) {
     const square = this.state.square.slice();
-    square[i] = this.state.playerOne ? "X" : "O";
-    this.setState({
-      square: square,
-      playerOne: !this.state.playerOne
-    });
+    if (!checkWinner(square)) {
+      square[i] = this.state.playerOne ? "X" : "O";
+      this.setState({
+        square: square,
+        playerOne: !this.state.playerOne
+      });
+    }
   }
 
   renderSquare(i) {
@@ -29,8 +31,16 @@ export default class Board extends Component {
   }
 
   render() {
+    let status;
+    const winner = checkWinner(this.state.square);
+    if (winner) {
+      status = "Winner: " + winner;
+    } else {
+      status = "Next player: " + (this.state.playerOne ? "X" : "O");
+    }
     return (
       <>
+        {status}
         <div className="board-row">
           {this.renderSquare(0)}
           {this.renderSquare(1)}
