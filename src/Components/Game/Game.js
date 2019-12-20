@@ -5,23 +5,28 @@ export default class Game extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      square: Array(9).fill(null),
+      history: [{ square: Array(9).fill(null) }],
       playerOne: true
     };
   }
   changePlayer(i) {
-    const square = this.state.square.slice();
+    const history = this.state.history;
+    const currentSquare = history[history.length - 1];
+    const square = currentSquare.square.slice();
     if (!checkWinner(square)) {
       square[i] = this.state.playerOne ? "X" : "O";
       this.setState({
-        square: square,
-        playerOne: !this.state.playerOne
+        playerOne: !this.state.playerOne,
+        history: history.concat([{ square: square }])
       });
     }
   }
   render() {
+    const history = this.state.history;
+    const currentSquare = history[history.length - 1];
+    const square = currentSquare.square;
     let status;
-    const winner = checkWinner(this.state.square);
+    const winner = checkWinner(square);
     if (winner) {
       status = "Winner: " + winner;
     } else {
@@ -31,7 +36,7 @@ export default class Game extends Component {
       <div className="game">
         <div className="game-board">
           <Board
-            square={this.state.square}
+            square={square}
             onClick={i => {
               this.changePlayer(i);
             }}
