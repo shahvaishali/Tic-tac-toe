@@ -6,31 +6,41 @@ export default class Game extends Component {
     super(props);
     this.state = {
       history: [{ square: Array(9).fill(null) }],
-      playerOne: true
+      playerOne: true,
+      stepNum: 0
     };
   }
   changePlayer(i) {
-    const history = this.state.history;
-    const currentSquare = history[history.length - 1];
+    const history = this.state.history.slice(0, this.state.stepNum + 1);
+    const currentSquare = history[this.state.stepNum];
     const square = currentSquare.square.slice();
     if (!checkWinner(square)) {
       square[i] = this.state.playerOne ? "X" : "O";
       this.setState({
         playerOne: !this.state.playerOne,
-        history: history.concat([{ square: square }])
+        history: history.concat([{ square: square }]),
+        stepNum: this.state.stepNum + 1
       });
+      console.log(this.state.stepNum + 1);
     }
+  }
+  jumpTo(step) {
+    this.setState({
+      stepNum: step,
+      history: this.state.history.slice(0, step + 1),
+      playerOne: step % 2 === 0
+    });
   }
   render() {
     const history = this.state.history;
-    const currentSquare = history[history.length - 1];
+    const currentSquare = history[this.state.stepNum];
     const square = currentSquare.square;
 
     const steps = history.map((step, move) => {
       const desc = move ? "Go to move #" + move : "Go to game start";
       return (
         <li key={move}>
-          <button>{desc}</button>
+          <button onClick={() => this.jumpTo(move)}>{desc}</button>
         </li>
       );
     });
@@ -50,10 +60,10 @@ export default class Game extends Component {
               this.changePlayer(i);
             }}
           />
-        </div>
-        <div className="game-info">
-          <div>{status}</div>
-          <ol>{steps}</ol>
+          <div className="game-info">
+            <div>{status}</div>
+            <ol>{steps}</ol>
+          </div>
         </div>
       </div>
     );
