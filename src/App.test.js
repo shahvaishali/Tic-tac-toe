@@ -1,10 +1,10 @@
 import React from "react";
 import { shallow } from "enzyme";
 import App from "./App";
-import Board from "./Components/Board/Board";
+import Game from "./Components/Game/Game";
 
 it("should render board component", () => {
   const wrapper = shallow(<App />);
-  const board = wrapper.find(Board);
-  expect(board.exists()).toBe(true);
+  const game = wrapper.find(Game);
+  expect(game.exists()).toBe(true);
 });

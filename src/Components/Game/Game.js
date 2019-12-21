@@ -25,6 +25,15 @@ export default class Game extends Component {
     const history = this.state.history;
     const currentSquare = history[history.length - 1];
     const square = currentSquare.square;
+
+    const steps = history.map((step, move) => {
+      const desc = move ? "Go to move #" + move : "Go to game start";
+      return (
+        <li key={move}>
+          <button>{desc}</button>
+        </li>
+      );
+    });
     let status;
     const winner = checkWinner(square);
     if (winner) {
@@ -44,7 +53,7 @@ export default class Game extends Component {
         </div>
         <div className="game-info">
           <div>{status}</div>
-          <ol>{/* TODO */}</ol>
+          <ol>{steps}</ol>
         </div>
       </div>
     );
