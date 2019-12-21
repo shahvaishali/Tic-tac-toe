@@ -21,7 +21,6 @@ export default class Game extends Component {
         history: history.concat([{ square: square }]),
         stepNum: this.state.stepNum + 1
       });
-      console.log(this.state.stepNum + 1);
     }
   }
   jumpTo(step) {
@@ -29,6 +28,14 @@ export default class Game extends Component {
       stepNum: step,
       history: this.state.history.slice(0, step + 1),
       playerOne: step % 2 === 0
+    });
+  }
+
+  gameReset() {
+    this.setState({
+      playerOne: true,
+      history: this.state.history.splice(0, 1),
+      stepNum: 0
     });
   }
   render() {
@@ -60,10 +67,12 @@ export default class Game extends Component {
               this.changePlayer(i);
             }}
           />
-          <div className="game-info">
-            <div>{status}</div>
-            <ol>{steps}</ol>
-          </div>
+        </div>
+        <div className="game-info">
+          <button onClick={() => this.gameReset()}>RESET</button>
+          <div>{status}</div>
+
+          <ol>{steps}</ol>
         </div>
       </div>
     );

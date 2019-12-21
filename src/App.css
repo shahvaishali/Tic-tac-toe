@@ -1,3 +1,7 @@
+ol,
+ul {
+  padding-left: 30px;
+}
 .square {
   background: #ffffff;
   border: 1px solid #999;
@@ -25,4 +29,11 @@
   clear: both;
   content: "";
   display: table;
+}
+.game {
+  display: flex;
+  flex-direction: row;
+}
+.game-info {
+  margin-left: 20px;
 }
