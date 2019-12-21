@@ -14,7 +14,7 @@ export default class Game extends Component {
     const history = this.state.history.slice(0, this.state.stepNum + 1);
     const currentSquare = history[this.state.stepNum];
     const square = currentSquare.square.slice();
-    if (!checkWinner(square)) {
+    if (this.state.stepNum <= 8 && !checkWinner(square)) {
       square[i] = this.state.playerOne ? "X" : "O";
       this.setState({
         playerOne: !this.state.playerOne,
@@ -34,7 +34,7 @@ export default class Game extends Component {
   gameReset() {
     this.setState({
       playerOne: true,
-      history: this.state.history.splice(0, 1),
+      history: this.state.history.slice(0, 1),
       stepNum: 0
     });
   }
@@ -54,10 +54,13 @@ export default class Game extends Component {
     let status;
     const winner = checkWinner(square);
     if (winner) {
-      status = "Winner: " + winner;
+      status = "The winner is : " + winner;
+    } else if (this.state.stepNum > 8) {
+      status = "It's a tie!";
     } else {
-      status = "Next player: " + (this.state.playerOne ? "X" : "O");
+      status = "Next player is : " + (this.state.playerOne ? "X" : "O");
     }
+
     return (
       <div className="game">
         <div className="game-board">
