@@ -14,7 +14,7 @@ export default class Game extends Component {
     const history = this.state.history.slice(0, this.state.stepNum + 1);
     const currentSquare = history[this.state.stepNum];
     const square = currentSquare.square.slice();
-    if (this.state.stepNum <= 8 && !checkWinner(square)) {
+    if (this.state.stepNum <= 8 && !checkWinner(square) && !square[i]) {
       square[i] = this.state.playerOne ? "X" : "O";
       this.setState({
         playerOne: !this.state.playerOne,
