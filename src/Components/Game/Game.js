@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Board from "../Board/Board";
+import { checkWinner } from "../../lib/checkwinner";
 
 export default class Game extends Component {
   constructor(props) {
@@ -62,43 +63,25 @@ export default class Game extends Component {
     }
 
     return (
-      <div className="game">
-        <div className="game-board">
-          <Board
-            square={square}
-            onClick={i => {
-              this.changePlayer(i);
-            }}
-          />
-        </div>
-        <div className="game-info">
-          <button onClick={() => this.gameReset()}>RESET</button>
-          <div>{status}</div>
+      <>
+        <div className="game">
+          <div className="game-board">
+            <Board
+              square={square}
+              onClick={i => {
+                this.changePlayer(i);
+              }}
+            />
+          </div>
 
-          <ol>{steps}</ol>
+          <div className="game-info">
+            <button onClick={() => this.gameReset()}>RESET</button>
+            <div>{status}</div>
+
+            <ol>{steps}</ol>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
-}
-
-function checkWinner(square) {
-  let combinations = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-  ];
-
-  for (let i = 0; i < combinations.length; i++) {
-    const [a, b, c] = combinations[i];
-    if (square[a] && square[a] === square[b] && square[a] === square[c]) {
-      return square[a];
-    }
-  }
-  return null;
 }
