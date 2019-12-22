@@ -18,5 +18,11 @@ describe ('detect player turn', () => {
   it("detect player 2's turn", () => {
     expect(playerTwo).toEqual('Player 2 (O)')
   });
+
+  wrapper.find('div.square').first().simulate('click')
+  it("false turn detection", () => {
+    expect(wrapper.find('h5.playerTurn').text()).toEqual('Player 2 (O)')
+  });
+
 })
 
