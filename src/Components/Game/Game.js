@@ -11,11 +11,17 @@ export default class Game extends Component {
       stepNum: 0
     };
   }
+
   changePlayer(i) {
     const history = this.state.history.slice(0, this.state.stepNum + 1);
     const currentSquare = history[this.state.stepNum];
     const square = currentSquare.square.slice();
-    if (this.state.stepNum <= 8 && !checkWinner(square) && !square[i]) {
+    
+    if (this.state.stepNum > 8 || checkWinner(square)){
+      // Resets the game with click in events such as tie or winner
+      this.gameReset()
+    }
+    else if (this.state.stepNum <= 8 && !checkWinner(square) && !square[i]) {
       square[i] = this.state.playerOne ? "X" : "O";
       this.setState({
         playerOne: !this.state.playerOne,
@@ -23,7 +29,9 @@ export default class Game extends Component {
         stepNum: this.state.stepNum + 1
       });
     }
+
   }
+
   jumpTo(step) {
     this.setState({
       stepNum: step,
@@ -39,13 +47,14 @@ export default class Game extends Component {
       stepNum: 0
     });
   }
+
   render() {
     const history = this.state.history;
     const currentSquare = history[this.state.stepNum];
     const square = currentSquare.square;
 
     const steps = history.map((step, move) => {
-      const desc = move ? "Go to move #" + move : "Go to game start";
+      const desc = move ? "Go to move #" + move : "Reset";
       return (
         <li key={move}>
           <button  className="btn btn-info mb-1" onClick={() => this.jumpTo(move)}>{desc}</button>
@@ -78,7 +87,6 @@ export default class Game extends Component {
               }}
             />
             <div className="co-12 mt-4">
-            <button className="btn btn-info" onClick={() => this.gameReset()}>RESET</button>
             <div>{status}</div>
             </div>
           </div>
