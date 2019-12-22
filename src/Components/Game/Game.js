@@ -48,7 +48,7 @@ export default class Game extends Component {
       const desc = move ? "Go to move #" + move : "Go to game start";
       return (
         <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
+          <button  className="btn btn-info mb-1" onClick={() => this.jumpTo(move)}>{desc}</button>
         </li>
       );
     });
@@ -64,21 +64,26 @@ export default class Game extends Component {
 
     return (
       <>
-        <div className="game">
-          <div className="game-board">
+      <div className="row justify-content-md-center">
+        <div className="col col-3 mt-4">
+        <h1>Tic Tac Toe</h1>
+        </div>
+      </div>
+        <div className="row justify-content-end mt-3">
+          <div className="col-4 mt-4">
             <Board
-              square={square}
+               square={square}
               onClick={i => {
                 this.changePlayer(i);
               }}
             />
-          </div>
-
-          <div className="game-info">
-            <button onClick={() => this.gameReset()}>RESET</button>
+            <div className="co-12 mt-4">
+            <button className="btn btn-info" onClick={() => this.gameReset()}>RESET</button>
             <div>{status}</div>
-
-            <ol>{steps}</ol>
+            </div>
+          </div>
+          <div className="col-4 mt-4">
+            <ul>{steps}</ul>
           </div>
         </div>
       </>
