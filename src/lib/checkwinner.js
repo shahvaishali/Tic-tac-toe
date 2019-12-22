@@ -13,8 +13,8 @@ export function checkWinner(square) {
   for (let i = 0; i < combinations.length; i++) {
     const [a, b, c] = combinations[i];
     if (square[a] && square[a] === square[b] && square[a] === square[c]) {
-      return square[a];
+      return {'winner': square[a], 'line': combinations[i]};
     }
   }
-  return null;
+  return {'winner': null, 'line': []};
 }

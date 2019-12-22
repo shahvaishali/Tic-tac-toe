@@ -16,12 +16,12 @@ export default class Game extends Component {
     const history = this.state.history.slice(0, this.state.stepNum + 1);
     const currentSquare = history[this.state.stepNum];
     const square = currentSquare.square.slice();
-    
-    if (this.state.stepNum > 8 || checkWinner(square)){
+    const winner = checkWinner(square)
+    if (this.state.stepNum > 8 || winner.winner){
       // Resets the game with click in events such as tie or winner
       this.gameReset()
     }
-    else if (this.state.stepNum <= 8 && !checkWinner(square) && !square[i]) {
+    else if (this.state.stepNum <= 8 && !winner.winner && !square[i]) {
       square[i] = this.state.playerOne ? "X" : "O";
       this.setState({
         playerOne: !this.state.playerOne,
@@ -63,14 +63,13 @@ export default class Game extends Component {
     });
     let status;
     const winner = checkWinner(square);
-    if (winner) {
-      status = "The winner is : " + winner;
+    if (winner.winner) {
+      status = "The winner is : " + winner.winner;
     } else if (this.state.stepNum > 8) {
       status = "It's a tie!";
     } else {
       status = "Next player is : " + (this.state.playerOne ? "X" : "O");
     }
-
     return (
       <>
       <div className="row justify-content-md-center">
@@ -82,9 +81,10 @@ export default class Game extends Component {
           <div className="col-4 mt-4">
             <Board
                square={square}
-              onClick={i => {
+               onClick={i => {
                 this.changePlayer(i);
-              }}
+               }}
+               blinker={winner.line}
             />
             <div className="co-12 mt-4">
             <div>{status}</div>

@@ -3,11 +3,16 @@ import Square from "../Square/Square";
 
 export default class Board extends Component {
   renderSquare(i, style) {
+    let blink_style = ""
+    if (this.props.blinker.includes(i)){
+      blink_style = "blink_me"  
+    }
     return (
       <Square
         value={this.props.square[i]}
         onClick={() => this.props.onClick(i)}
         style={style}
+        blink_style={blink_style}
       />
     );
   }
