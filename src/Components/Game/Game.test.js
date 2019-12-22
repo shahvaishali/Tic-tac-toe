@@ -25,5 +25,10 @@ describe ('detect player turn', () => {
     expect(falseDetect).toEqual('Player 2 (O)')
   });
 
+  wrapper.find('div.square').at(5).simulate('click')
+  it("toggle detection", () => {
+    expect(wrapper.find('h5.playerTurn').text()).toEqual('Player 1 (X)')
+  });
+
 })
 
