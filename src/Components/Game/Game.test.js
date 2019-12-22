@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Children } from "react";
 import Game from "./game";
 import { shallow, mount } from "enzyme";
 
@@ -20,8 +20,9 @@ describe ('detect player turn', () => {
   });
 
   wrapper.find('div.square').first().simulate('click')
+  const falseDetect = wrapper.find('h5.playerTurn').text()
   it("false turn detection", () => {
-    expect(wrapper.find('h5.playerTurn').text()).toEqual('Player 2 (O)')
+    expect(falseDetect).toEqual('Player 2 (O)')
   });
 
 })
