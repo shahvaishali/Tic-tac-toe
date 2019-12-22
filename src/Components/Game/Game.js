@@ -54,16 +54,21 @@ export default class Game extends Component {
   }
 
   jumpTo(step) {
+    let totalMatch = this.state.X + this.state.O + this.state.draw
+    let turn = totalMatch % 2
     this.setState({
       stepNum: step,
       history: this.state.history.slice(0, step + 1),
-      playerOne: step % 2 === 0
+      playerOne: step % 2 === turn
     });
   }
 
   gameReset(winner) {
+    let totalMatch = this.state.X + this.state.O + this.state.draw
+    let turn = ((totalMatch % 2) === 0)
+    
     this.setState({
-      playerOne: true,
+      playerOne: turn,
       history: this.state.history.slice(0, 1),
       stepNum: 0
     });
@@ -75,7 +80,7 @@ export default class Game extends Component {
     const square = currentSquare.square;
 
     const steps = history.map((step, move) => {
-      const desc = move ? "Go to move #" + move : "Reset";
+      const desc = move ? "Go to move #" + move : "Start";
       return (
         <li key={move}>
           <button  className="btn btn-info mb-1" onClick={() => this.jumpTo(move)}>{desc}</button>
@@ -86,10 +91,13 @@ export default class Game extends Component {
     let playerTwo =  "playerNoTurn"
     const winner = checkWinner(square);
     let status
+    let style = ''
     if (winner.winner) {
-      status = winner.winner + " Wins";
+      status = "Player " + winner.winner + " Wins";
+      style = 'bg-opacity'
     } else if (this.state.stepNum > 8) {
-      status = "It's a tie!";
+      status = "X/O draw!!";
+      style = 'bg-opacity blink_me'
     } 
     else{
       playerOne = this.state.playerOne ? "playerTurn" : "playerNoTurn"
@@ -105,12 +113,14 @@ export default class Game extends Component {
       </div>
         <div className="row justify-content-end mt-3">
           <div className="col-4 mt-4">
+            <div className='status'>{status}</div>
             <Board
                square={square}
                onClick={i => {
                 this.changePlayer(i);
                }}
                blinker={winner.line}
+               style={style}
             />
             <div className="co-12 mt-4">
             <div className="row">
