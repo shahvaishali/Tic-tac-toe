@@ -154,3 +154,62 @@ describe('Player 2 win check', () => {
     expect(wrapper.find('div.square').at(8).children().hasClass('blink_me')).toEqual(false);
   })
 })
+
+describe('Tie', () => {
+  const wrapper = mount(<Game />)
+  
+  //Player 1 turn
+  wrapper.find('div.square').at(0).simulate('click')
+  
+  //Player 2 turn
+  wrapper.find('div.square').at(4).simulate('click')
+
+  //Player 1 turn
+  wrapper.find('div.square').at(1).simulate('click')
+  
+  //Player 2 turn
+  wrapper.find('div.square').at(2).simulate('click')
+
+  //Player 1 turn
+  wrapper.find('div.square').at(6).simulate('click')
+
+  //Player 2 turn
+  wrapper.find('div.square').at(3).simulate('click')
+
+  //Player 1 turn
+  wrapper.find('div.square').at(5).simulate('click')
+
+  //Player 2 turn
+  wrapper.find('div.square').at(7).simulate('click')
+
+  //Player 1 turn
+  wrapper.find('div.square').at(8).simulate('click')
+
+  const tieDisplay = wrapper.find('div.status').text()
+  it("Tie display", () => {
+    expect(tieDisplay).toEqual('X/O draw!!')
+  });
+
+  const turncheck = wrapper.find('h5.playerNoTurn')
+  it("Detect turn style is removed", () => {
+    expect(turncheck.at(0).text()).toEqual('Player 1 (X)')
+    expect(turncheck.at(1).text()).toEqual('Player 2 (O)')
+  });
+
+  it("Scorechecker", () => {
+    expect(wrapper.find('#team1').text()).toEqual('0')
+    expect(wrapper.find('#team2').text()).toEqual('0')
+  })
+
+  it("Blinker", () => {
+    expect(wrapper.find('div.square').at(0).hasClass('blink_me')).toEqual(true);
+    expect(wrapper.find('div.square').at(1).hasClass('blink_me')).toEqual(true);
+    expect(wrapper.find('div.square').at(2).hasClass('blink_me')).toEqual(true);
+    expect(wrapper.find('div.square').at(3).hasClass('blink_me')).toEqual(true);
+    expect(wrapper.find('div.square').at(4).hasClass('blink_me')).toEqual(true);
+    expect(wrapper.find('div.square').at(5).hasClass('blink_me')).toEqual(true);
+    expect(wrapper.find('div.square').at(6).hasClass('blink_me')).toEqual(true);
+    expect(wrapper.find('div.square').at(7).hasClass('blink_me')).toEqual(true);
+    expect(wrapper.find('div.square').at(8).hasClass('blink_me')).toEqual(true);
+  })
+})
