@@ -61,21 +61,8 @@ describe('detect clicks', () => {
 describe('Player 1 win check', () => {
   const wrapper = mount(<Game />)
   
-  //Player 1 turn
-  wrapper.find('div.square').at(0).simulate('click')
-  
-  //Player 2 turn
-  wrapper.find('div.square').at(1).simulate('click')
+  clickEvent(wrapper, [0, 1, 4, 5, 8], 'div.square')
 
-  //Player 1 turn
-  wrapper.find('div.square').at(4).simulate('click')
-  
-  //Player 2 turn
-  wrapper.find('div.square').at(5).simulate('click')
-
-  //Player 1 turn
-  wrapper.find('div.square').at(8).simulate('click')
-  
   const playerOne = wrapper.find('div.status').text()
   it("Player 1 winner", () => {
     expect(playerOne).toEqual('Player X Wins')
@@ -93,38 +80,18 @@ describe('Player 1 win check', () => {
   })
 
   it("Blinker", () => {
-    expect(wrapper.find('div.square').at(0).children().hasClass('blink_me')).toEqual(true);
-    expect(wrapper.find('div.square').at(1).children().hasClass('blink_me')).toEqual(false);
-    expect(wrapper.find('div.square').at(2).children().hasClass('blink_me')).toEqual(false);
-    expect(wrapper.find('div.square').at(3).children().hasClass('blink_me')).toEqual(false);
-    expect(wrapper.find('div.square').at(4).children().hasClass('blink_me')).toEqual(true);
-    expect(wrapper.find('div.square').at(5).children().hasClass('blink_me')).toEqual(false);
-    expect(wrapper.find('div.square').at(6).children().hasClass('blink_me')).toEqual(false);
-    expect(wrapper.find('div.square').at(7).children().hasClass('blink_me')).toEqual(false);
-    expect(wrapper.find('div.square').at(8).children().hasClass('blink_me')).toEqual(true);
+    const blink = [true, false, false, false, true, false, false, false, true]
+    const blinker =  wrapper.find('div.square')
+    for(var i = 0; i < blinker.length; i++){
+      expect(blinker.at(i).children().hasClass('blink_me')).toEqual(blink[i]);
+    }
   })
 })
 
 describe('Player 2 win check', () => {
   const wrapper = mount(<Game />)
   
-  //Player 1 turn
-  wrapper.find('div.square').at(1).simulate('click')
-  
-  //Player 2 turn
-  wrapper.find('div.square').at(0).simulate('click')
-
-  //Player 1 turn
-  wrapper.find('div.square').at(5).simulate('click')
-  
-  //Player 2 turn
-  wrapper.find('div.square').at(3).simulate('click')
-
-  //Player 1 turn
-  wrapper.find('div.square').at(7).simulate('click')
-
-  //Player 2 turn
-  wrapper.find('div.square').at(6).simulate('click')
+  clickEvent(wrapper, [1, 0, 5, 3, 7, 6], 'div.square')
 
   const playerTwo = wrapper.find('div.status').text()
   it("Player 2 winner", () => {
@@ -143,47 +110,19 @@ describe('Player 2 win check', () => {
   })
 
   it("Blinker", () => {
-    expect(wrapper.find('div.square').at(0).children().hasClass('blink_me')).toEqual(true);
-    expect(wrapper.find('div.square').at(1).children().hasClass('blink_me')).toEqual(false);
-    expect(wrapper.find('div.square').at(2).children().hasClass('blink_me')).toEqual(false);
-    expect(wrapper.find('div.square').at(3).children().hasClass('blink_me')).toEqual(true);
-    expect(wrapper.find('div.square').at(4).children().hasClass('blink_me')).toEqual(false);
-    expect(wrapper.find('div.square').at(5).children().hasClass('blink_me')).toEqual(false);
-    expect(wrapper.find('div.square').at(6).children().hasClass('blink_me')).toEqual(true);
-    expect(wrapper.find('div.square').at(7).children().hasClass('blink_me')).toEqual(false);
-    expect(wrapper.find('div.square').at(8).children().hasClass('blink_me')).toEqual(false);
+    const blink = [true, false, false, true, false, false, true, false, false]
+    const blinker =  wrapper.find('div.square')
+    for(var i = 0; i < blinker.length; i++){
+      expect(blinker.at(i).children().hasClass('blink_me')).toEqual(blink[i]);
+    }
   })
+  
 })
 
 describe('Tie', () => {
   const wrapper = mount(<Game />)
-  
-  //Player 1 turn
-  wrapper.find('div.square').at(0).simulate('click')
-  
-  //Player 2 turn
-  wrapper.find('div.square').at(4).simulate('click')
 
-  //Player 1 turn
-  wrapper.find('div.square').at(1).simulate('click')
-  
-  //Player 2 turn
-  wrapper.find('div.square').at(2).simulate('click')
-
-  //Player 1 turn
-  wrapper.find('div.square').at(6).simulate('click')
-
-  //Player 2 turn
-  wrapper.find('div.square').at(3).simulate('click')
-
-  //Player 1 turn
-  wrapper.find('div.square').at(5).simulate('click')
-
-  //Player 2 turn
-  wrapper.find('div.square').at(7).simulate('click')
-
-  //Player 1 turn
-  wrapper.find('div.square').at(8).simulate('click')
+  clickEvent(wrapper, [0, 4, 1, 2, 6, 3, 5, 7, 8], 'div.square')
 
   const tieDisplay = wrapper.find('div.status').text()
   it("Tie display", () => {
@@ -202,15 +141,10 @@ describe('Tie', () => {
   })
 
   it("Blinker", () => {
-    expect(wrapper.find('div.square').at(0).hasClass('blink_me')).toEqual(true);
-    expect(wrapper.find('div.square').at(1).hasClass('blink_me')).toEqual(true);
-    expect(wrapper.find('div.square').at(2).hasClass('blink_me')).toEqual(true);
-    expect(wrapper.find('div.square').at(3).hasClass('blink_me')).toEqual(true);
-    expect(wrapper.find('div.square').at(4).hasClass('blink_me')).toEqual(true);
-    expect(wrapper.find('div.square').at(5).hasClass('blink_me')).toEqual(true);
-    expect(wrapper.find('div.square').at(6).hasClass('blink_me')).toEqual(true);
-    expect(wrapper.find('div.square').at(7).hasClass('blink_me')).toEqual(true);
-    expect(wrapper.find('div.square').at(8).hasClass('blink_me')).toEqual(true);
+    const blinker =  wrapper.find('div.square')
+    for(var i = 0; i < blinker.length; i++){
+      expect(blinker.at(i).hasClass('blink_me')).toEqual(true);
+    }
   })
 })
 
@@ -222,40 +156,13 @@ describe('Past History', () => {
     expect(start).toEqual('Start')
   })
 
-  //Player 1 turn
-  wrapper.find('div.square').at(0).simulate('click')
-  
-  //Player 2 turn
-  wrapper.find('div.square').at(4).simulate('click')
+  clickEvent(wrapper, [0, 4, 1, 2, 6, 3, 5, 7], 'div.square')
 
-  //Player 1 turn
-  wrapper.find('div.square').at(1).simulate('click')
-  
-  //Player 2 turn
-  wrapper.find('div.square').at(2).simulate('click')
-
-  //Player 1 turn
-  wrapper.find('div.square').at(6).simulate('click')
-
-  //Player 2 turn
-  wrapper.find('div.square').at(3).simulate('click')
-
-  //Player 1 turn
-  wrapper.find('div.square').at(5).simulate('click')
-
-  //Player 2 turn
-  wrapper.find('div.square').at(7).simulate('click')
-  
   const histMoves = wrapper.find('li')
   it('All history button checks', () => {
-    expect(histMoves.first().text()).toEqual('Start')
-    expect(histMoves.at(1).text()).toEqual('Go to move #1')
-    expect(histMoves.at(2).text()).toEqual('Go to move #2')
-    expect(histMoves.at(3).text()).toEqual('Go to move #3')
-    expect(histMoves.at(4).text()).toEqual('Go to move #4')
-    expect(histMoves.at(5).text()).toEqual('Go to move #5')
-    expect(histMoves.at(6).text()).toEqual('Go to move #6')
-    expect(histMoves.at(7).text()).toEqual('Go to move #7')
+    checkEvent(histMoves, [0, 1, 2, 3, 4, 5, 6, 7, 8], 
+      ['Start', 'Go to move #1', 'Go to move #2', 'Go to move #3', 'Go to move #4', 
+      'Go to move #5', 'Go to move #6', 'Go to move #7', 'Go to move #8'])
     expect(histMoves.last().text()).toEqual('Go to move #8')
   })
 
@@ -271,29 +178,7 @@ describe('Past History', () => {
 describe('History Interoperability tests', () => {
   const wrapper = mount(<Game />)
 
-  //Player 1 turn
-  wrapper.find('div.square').at(0).simulate('click')
-
-  //Player 2 turn
-  wrapper.find('div.square').at(4).simulate('click')
-
-  //Player 1 turn
-  wrapper.find('div.square').at(1).simulate('click')
-  
-  //Player 2 turn
-  wrapper.find('div.square').at(2).simulate('click')
-
-  //Player 1 turn
-  wrapper.find('div.square').at(6).simulate('click')
-
-  //Player 2 turn
-  wrapper.find('div.square').at(3).simulate('click')
-
-  //Player 1 turn
-  wrapper.find('div.square').at(5).simulate('click')
-
-  //Player 2 turn
-  wrapper.find('div.square').at(7).simulate('click')  
+  clickEvent(wrapper, [0, 4, 1, 2, 6, 3, 5, 7], 'div.square')
 
   const playerOne = wrapper.find('h5.playerTurn').text()
   
@@ -310,14 +195,7 @@ describe('History Interoperability tests', () => {
 
   const squareCheck = wrapper.find('div.square')
   it('detect square boxes', () => {
-    expect(squareCheck.at(0).text()).toEqual('X')
-    expect(squareCheck.at(4).text()).toEqual('O')
-    expect(squareCheck.at(1).text()).toEqual('X')
-    expect(squareCheck.at(2).text()).toEqual('')
-    expect(squareCheck.at(6).text()).toEqual('')
-    expect(squareCheck.at(3).text()).toEqual('')
-    expect(squareCheck.at(5).text()).toEqual('')
-    expect(squareCheck.at(7).text()).toEqual('')
+    checkEvent(squareCheck, [0, 4, 1, 2, 6, 3, 5, 7], ['X', 'O', 'X', '', '', '', '', ''])
   })
   
 })
@@ -326,12 +204,8 @@ describe('Player 2 start move after 1st game', () => {
   const wrapper = mount(<Game />)
   
   // Player 1 wins
-  wrapper.find('div.square').at(0).simulate('click')
-  wrapper.find('div.square').at(1).simulate('click')
-  wrapper.find('div.square').at(4).simulate('click')
-  wrapper.find('div.square').at(5).simulate('click')
-  wrapper.find('div.square').at(8).simulate('click')
-  
+  clickEvent(wrapper, [0, 1, 4, 5, 8], 'div.square')
+ 
   // Reset and start next game
   wrapper.find('div.square').at(8).simulate('click')
   
@@ -345,3 +219,15 @@ describe('Player 2 start move after 1st game', () => {
     expect(wrapper.find('#team2').text()).toEqual('0')
   })
 })
+
+function clickEvent(wrapper, clicks, tag){
+  clicks.forEach((click)=>{
+    wrapper.find(tag).at(click).simulate('click')
+  })
+}
+
+function checkEvent(wrapper, nodes, expected){
+  for (var i = 0; i < nodes.length; i++){
+    expect(wrapper.at(nodes[i]).text()).toEqual(expected[i])
+  }
+}
