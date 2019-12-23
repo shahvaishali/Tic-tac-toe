@@ -1,4 +1,4 @@
-import React, { Children } from "react";
+import React from "react";
 import Game from "./game";
 import { shallow, mount } from "enzyme";
 
@@ -246,15 +246,24 @@ describe('Past History', () => {
   //Player 2 turn
   wrapper.find('div.square').at(7).simulate('click')
   
+  const histMoves = wrapper.find('li')
   it('All history button checks', () => {
-    expect(wrapper.find('li').first().text()).toEqual('Start')
-    expect(wrapper.find('li').at(1).text()).toEqual('Go to move #1')
-    expect(wrapper.find('li').at(2).text()).toEqual('Go to move #2')
-    expect(wrapper.find('li').at(3).text()).toEqual('Go to move #3')
-    expect(wrapper.find('li').at(4).text()).toEqual('Go to move #4')
-    expect(wrapper.find('li').at(5).text()).toEqual('Go to move #5')
-    expect(wrapper.find('li').at(6).text()).toEqual('Go to move #6')
-    expect(wrapper.find('li').at(7).text()).toEqual('Go to move #7')
-    expect(wrapper.find('li').at(8).text()).toEqual('Go to move #8')
+    expect(histMoves.first().text()).toEqual('Start')
+    expect(histMoves.at(1).text()).toEqual('Go to move #1')
+    expect(histMoves.at(2).text()).toEqual('Go to move #2')
+    expect(histMoves.at(3).text()).toEqual('Go to move #3')
+    expect(histMoves.at(4).text()).toEqual('Go to move #4')
+    expect(histMoves.at(5).text()).toEqual('Go to move #5')
+    expect(histMoves.at(6).text()).toEqual('Go to move #6')
+    expect(histMoves.at(7).text()).toEqual('Go to move #7')
+    expect(histMoves.last().text()).toEqual('Go to move #8')
+  })
+
+  wrapper.find('li').at(2).find('button').first().simulate('click')
+  const pastMoves = wrapper.find('li')
+  it('Click on past move to check if button is working', () => {
+    expect(pastMoves.first().text()).toEqual('Start')
+    expect(pastMoves.at(1).text()).toEqual('Go to move #1')
+    expect(pastMoves.last().text()).toEqual('Go to move #2')
   })
 })
