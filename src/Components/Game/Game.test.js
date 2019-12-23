@@ -321,3 +321,23 @@ describe('History Interoperability tests', () => {
   })
   
 })
+
+describe('Player 2 start move after 1st game', () => {
+  const wrapper = mount(<Game />)
+  
+  // Player 1 wins
+  wrapper.find('div.square').at(0).simulate('click')
+  wrapper.find('div.square').at(1).simulate('click')
+  wrapper.find('div.square').at(4).simulate('click')
+  wrapper.find('div.square').at(5).simulate('click')
+  wrapper.find('div.square').at(8).simulate('click')
+  
+  // Reset and start next game
+  wrapper.find('div.square').at(8).simulate('click')
+  
+  const turncheck = wrapper.find('h5.playerTurn')
+  it("Detect player 2 starts the game", () => {
+    expect(turncheck.text()).toEqual('Player 2 (O)')
+  });
+
+})
