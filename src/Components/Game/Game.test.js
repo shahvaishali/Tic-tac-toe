@@ -267,3 +267,32 @@ describe('Past History', () => {
     expect(pastMoves.last().text()).toEqual('Go to move #2')
   })
 })
+
+describe('History Interoperability tests', () => {
+  const wrapper = mount(<Game />)
+
+  //Player 1 turn
+  wrapper.find('div.square').at(0).simulate('click')
+  
+  //Player 2 turn
+  wrapper.find('div.square').at(4).simulate('click')
+
+  //Player 1 turn
+  wrapper.find('div.square').at(1).simulate('click')
+  
+  //Player 2 turn
+  wrapper.find('div.square').at(2).simulate('click')
+
+  const playerOne = wrapper.find('h5.playerTurn').text()
+  it("detect player 1's turn", () => {
+    expect(playerOne).toEqual('Player 1 (X)')
+  });
+
+  wrapper.find('li').at(3).find('button').first().simulate('click')
+  
+  const playerTwo = wrapper.find('h5.playerTurn').text()
+  it("detect player 2's turn", () => {
+    expect(playerTwo).toEqual('Player 2 (O)')
+  })
+  
+})
