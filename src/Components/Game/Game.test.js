@@ -32,3 +32,10 @@ describe ('detect player turn', () => {
 
 })
 
+describe('detect clicks', () => {
+  const wrapper = mount(<Game/>)
+  const detectNull = wrapper.find('div.square').first().text()
+  it('detect empty box', () =>{
+     expect(detectNull).toEqual("");
+  })
+})
