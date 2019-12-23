@@ -273,7 +273,7 @@ describe('History Interoperability tests', () => {
 
   //Player 1 turn
   wrapper.find('div.square').at(0).simulate('click')
-  
+
   //Player 2 turn
   wrapper.find('div.square').at(4).simulate('click')
 
@@ -283,7 +283,20 @@ describe('History Interoperability tests', () => {
   //Player 2 turn
   wrapper.find('div.square').at(2).simulate('click')
 
+  //Player 1 turn
+  wrapper.find('div.square').at(6).simulate('click')
+
+  //Player 2 turn
+  wrapper.find('div.square').at(3).simulate('click')
+
+  //Player 1 turn
+  wrapper.find('div.square').at(5).simulate('click')
+
+  //Player 2 turn
+  wrapper.find('div.square').at(7).simulate('click')  
+
   const playerOne = wrapper.find('h5.playerTurn').text()
+  
   it("detect player 1's turn", () => {
     expect(playerOne).toEqual('Player 1 (X)')
   });
@@ -293,6 +306,18 @@ describe('History Interoperability tests', () => {
   const playerTwo = wrapper.find('h5.playerTurn').text()
   it("detect player 2's turn", () => {
     expect(playerTwo).toEqual('Player 2 (O)')
+  })
+
+  const squareCheck = wrapper.find('div.square')
+  it('detect square boxes', () => {
+    expect(squareCheck.at(0).text()).toEqual('X')
+    expect(squareCheck.at(4).text()).toEqual('O')
+    expect(squareCheck.at(1).text()).toEqual('X')
+    expect(squareCheck.at(2).text()).toEqual('')
+    expect(squareCheck.at(6).text()).toEqual('')
+    expect(squareCheck.at(3).text()).toEqual('')
+    expect(squareCheck.at(5).text()).toEqual('')
+    expect(squareCheck.at(7).text()).toEqual('')
   })
   
 })
