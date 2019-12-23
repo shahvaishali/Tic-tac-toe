@@ -76,9 +76,9 @@ describe('Player 1 win check', () => {
   //Player 1 turn
   wrapper.find('div.square').at(8).simulate('click')
   
-  const playerTwo = wrapper.find('div.status').text()
+  const playerOne = wrapper.find('div.status').text()
   it("Player 1 winner", () => {
-    expect(playerTwo).toEqual('Player X Wins')
+    expect(playerOne).toEqual('Player X Wins')
   });
 
   const turncheck = wrapper.find('h5.playerNoTurn')
@@ -103,6 +103,54 @@ describe('Player 1 win check', () => {
     expect(wrapper.find('div.square').at(7).children().hasClass('blink_me')).toEqual(false);
     expect(wrapper.find('div.square').at(8).children().hasClass('blink_me')).toEqual(true);
   })
-
 })
 
+describe('Player 2 win check', () => {
+  const wrapper = mount(<Game />)
+  
+  //Player 1 turn
+  wrapper.find('div.square').at(1).simulate('click')
+  
+  //Player 2 turn
+  wrapper.find('div.square').at(0).simulate('click')
+
+  //Player 1 turn
+  wrapper.find('div.square').at(5).simulate('click')
+  
+  //Player 2 turn
+  wrapper.find('div.square').at(3).simulate('click')
+
+  //Player 1 turn
+  wrapper.find('div.square').at(7).simulate('click')
+
+  //Player 2 turn
+  wrapper.find('div.square').at(6).simulate('click')
+
+  const playerTwo = wrapper.find('div.status').text()
+  it("Player 2 winner", () => {
+    expect(playerTwo).toEqual('Player O Wins')
+  });
+
+  const turncheck = wrapper.find('h5.playerNoTurn')
+  it("Detect turn style is removed", () => {
+    expect(turncheck.at(0).text()).toEqual('Player 1 (X)')
+    expect(turncheck.at(1).text()).toEqual('Player 2 (O)')
+  });
+
+  it("Scorechecker", () => {
+    expect(wrapper.find('#team1').text()).toEqual('0')
+    expect(wrapper.find('#team2').text()).toEqual('1')
+  })
+
+  it("Blinker", () => {
+    expect(wrapper.find('div.square').at(0).children().hasClass('blink_me')).toEqual(true);
+    expect(wrapper.find('div.square').at(1).children().hasClass('blink_me')).toEqual(false);
+    expect(wrapper.find('div.square').at(2).children().hasClass('blink_me')).toEqual(false);
+    expect(wrapper.find('div.square').at(3).children().hasClass('blink_me')).toEqual(true);
+    expect(wrapper.find('div.square').at(4).children().hasClass('blink_me')).toEqual(false);
+    expect(wrapper.find('div.square').at(5).children().hasClass('blink_me')).toEqual(false);
+    expect(wrapper.find('div.square').at(6).children().hasClass('blink_me')).toEqual(true);
+    expect(wrapper.find('div.square').at(7).children().hasClass('blink_me')).toEqual(false);
+    expect(wrapper.find('div.square').at(8).children().hasClass('blink_me')).toEqual(false);
+  })
+})

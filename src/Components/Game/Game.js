@@ -79,16 +79,9 @@ export default class Game extends Component {
     const currentSquare = history[this.state.stepNum];
     const square = currentSquare.square;
 
-    const steps = history.map((step, move) => {
-      const desc = move ? "Go to move #" + move : "Start";
-      return (
-        <li key={move}>
-          <button  className="btn btn-info mb-1" onClick={() => this.jumpTo(move)}>{desc}</button>
-        </li>
-      );
-    });
     let playerOne =  "playerNoTurn"
     let playerTwo =  "playerNoTurn"
+    let steps
     const winner = checkWinner(square);
     let status
     let style = ''
@@ -102,6 +95,14 @@ export default class Game extends Component {
     else{
       playerOne = this.state.playerOne ? "playerTurn" : "playerNoTurn"
       playerTwo = this.state.playerOne ? "playerNoTurn" : "playerTurn"
+      steps = history.map((step, move) => {
+        const desc = move ? "Go to move #" + move : "Start";
+        return (
+          <li key={move}>
+            <button  className="btn btn-info mb-1" onClick={() => this.jumpTo(move)}>{desc}</button>
+          </li>
+        );
+      });
     }
 
     return (
