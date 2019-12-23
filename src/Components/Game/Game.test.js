@@ -38,4 +38,11 @@ describe('detect clicks', () => {
   it('detect empty box', () =>{
      expect(detectNull).toEqual("");
   })
+
+  wrapper.find('div.square').first().simulate('click')
+  const firstClick = wrapper.find('div.square').first().text()
+  it("detect first click", () =>{
+    expect(firstClick).toEqual("X");
+  })
 })
+
