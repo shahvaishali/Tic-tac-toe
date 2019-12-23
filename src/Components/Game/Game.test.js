@@ -221,4 +221,40 @@ describe('Past History', () => {
   it('Initial History', () => {
     expect(start).toEqual('Start')
   })
+
+  //Player 1 turn
+  wrapper.find('div.square').at(0).simulate('click')
+  
+  //Player 2 turn
+  wrapper.find('div.square').at(4).simulate('click')
+
+  //Player 1 turn
+  wrapper.find('div.square').at(1).simulate('click')
+  
+  //Player 2 turn
+  wrapper.find('div.square').at(2).simulate('click')
+
+  //Player 1 turn
+  wrapper.find('div.square').at(6).simulate('click')
+
+  //Player 2 turn
+  wrapper.find('div.square').at(3).simulate('click')
+
+  //Player 1 turn
+  wrapper.find('div.square').at(5).simulate('click')
+
+  //Player 2 turn
+  wrapper.find('div.square').at(7).simulate('click')
+  
+  it('All history button checks', () => {
+    expect(wrapper.find('li').first().text()).toEqual('Start')
+    expect(wrapper.find('li').at(1).text()).toEqual('Go to move #1')
+    expect(wrapper.find('li').at(2).text()).toEqual('Go to move #2')
+    expect(wrapper.find('li').at(3).text()).toEqual('Go to move #3')
+    expect(wrapper.find('li').at(4).text()).toEqual('Go to move #4')
+    expect(wrapper.find('li').at(5).text()).toEqual('Go to move #5')
+    expect(wrapper.find('li').at(6).text()).toEqual('Go to move #6')
+    expect(wrapper.find('li').at(7).text()).toEqual('Go to move #7')
+    expect(wrapper.find('li').at(8).text()).toEqual('Go to move #8')
+  })
 })
