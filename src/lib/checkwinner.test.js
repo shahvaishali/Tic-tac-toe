@@ -31,7 +31,9 @@ describe('Check winner function', () => {
 
     test('Check if it is a tie', () => {
         expect(checkWinner(['X', 'O', 'X', 'X', 'X', 'O', 'O', 'X', 'O'])['winner']).toEqual(null)
+        expect(checkWinner(['X', 'O', 'X', 'X', 'X', 'O', 'O', 'X', 'O'])['line']).toEqual([])
         expect(checkWinner(['O', 'X', 'O', 'O', 'O', 'X', 'X', 'O', 'X'])['winner']).toEqual(null)
+        expect(checkWinner(['O', 'X', 'O', 'O', 'O', 'X', 'X', 'O', 'X'])['line']).toEqual([])
     })
 
 
