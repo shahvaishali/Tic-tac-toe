@@ -58,4 +58,28 @@ describe('detect clicks', () => {
   })
 })
 
+describe('Player 1 win check', () => {
+  const wrapper = mount(<Game />)
+  
+  //Player 1 turn
+  wrapper.find('div.square').at(0).simulate('click')
+  
+  //Player 2 turn
+  wrapper.find('div.square').at(1).simulate('click')
+
+  //Player 1 turn
+  wrapper.find('div.square').at(4).simulate('click')
+  
+  //Player 2 turn
+  wrapper.find('div.square').at(5).simulate('click')
+
+  //Player 1 turn
+  wrapper.find('div.square').at(8).simulate('click')
+  
+  const playerTwo = wrapper.find('div.status').text()
+  it("Player 1 winner", () => {
+    expect(playerTwo).toEqual('Player X Wins')
+  });
+
+})
 
