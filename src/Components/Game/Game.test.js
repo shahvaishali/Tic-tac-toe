@@ -47,8 +47,14 @@ describe('detect clicks', () => {
 
   wrapper.find('div.square').first().simulate('click')
   const falseClick = wrapper.find('div.square').first().text()
-  it("detect first click", () =>{
+  it("detect false click", () =>{
     expect(falseClick).toEqual("X");
+  })
+
+  wrapper.find('div.square').at(5).simulate('click')
+  const secondClick = wrapper.find('div.square').at(5).text()
+  it("detect second click", () =>{
+    expect(secondClick).toEqual("O");
   })
 })
 
