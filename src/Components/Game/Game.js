@@ -130,7 +130,7 @@ export default class Game extends Component {
               </div>
               <div className="ScoreBtnContainer col-md-4">
                   <h5 className={playerTwo}>Player 2 (O)</h5>
-              <div className="scoreBtn" id="team1">{this.state.O}</div>
+              <div className="scoreBtn" id="team2">{this.state.O}</div>
               </div>
              
             </div>

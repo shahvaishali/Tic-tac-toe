@@ -87,5 +87,10 @@ describe('Player 1 win check', () => {
     expect(turncheck.at(1).text()).toEqual('Player 2 (O)')
   });
 
+  it("Scorechecker", () => {
+    expect(wrapper.find('#team1').text()).toEqual('1')
+    expect(wrapper.find('#team2').text()).toEqual('0')
+  })
+
 })
 
