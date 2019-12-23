@@ -213,3 +213,12 @@ describe('Tie', () => {
     expect(wrapper.find('div.square').at(8).hasClass('blink_me')).toEqual(true);
   })
 })
+
+describe('Past History', () => {
+  const wrapper = mount(<Game />)
+  const start = wrapper.find('li').text()
+
+  it('Initial History', () => {
+    expect(start).toEqual('Start')
+  })
+})
