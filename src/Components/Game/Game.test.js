@@ -81,5 +81,11 @@ describe('Player 1 win check', () => {
     expect(playerTwo).toEqual('Player X Wins')
   });
 
+  const turncheck = wrapper.find('h5.playerNoTurn')
+  it("Detect turn style is removed", () => {
+    expect(turncheck.at(0).text()).toEqual('Player 1 (X)')
+    expect(turncheck.at(1).text()).toEqual('Player 2 (O)')
+  });
+
 })
 
