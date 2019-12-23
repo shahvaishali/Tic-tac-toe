@@ -92,5 +92,17 @@ describe('Player 1 win check', () => {
     expect(wrapper.find('#team2').text()).toEqual('0')
   })
 
+  it("Blinker", () => {
+    expect(wrapper.find('div.square').at(0).children().hasClass('blink_me')).toEqual(true);
+    expect(wrapper.find('div.square').at(1).children().hasClass('blink_me')).toEqual(false);
+    expect(wrapper.find('div.square').at(2).children().hasClass('blink_me')).toEqual(false);
+    expect(wrapper.find('div.square').at(3).children().hasClass('blink_me')).toEqual(false);
+    expect(wrapper.find('div.square').at(4).children().hasClass('blink_me')).toEqual(true);
+    expect(wrapper.find('div.square').at(5).children().hasClass('blink_me')).toEqual(false);
+    expect(wrapper.find('div.square').at(6).children().hasClass('blink_me')).toEqual(false);
+    expect(wrapper.find('div.square').at(7).children().hasClass('blink_me')).toEqual(false);
+    expect(wrapper.find('div.square').at(8).children().hasClass('blink_me')).toEqual(true);
+  })
+
 })
 
