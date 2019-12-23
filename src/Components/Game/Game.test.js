@@ -340,4 +340,8 @@ describe('Player 2 start move after 1st game', () => {
     expect(turncheck.text()).toEqual('Player 2 (O)')
   });
 
+  it("Scorechecker after first game", () => {
+    expect(wrapper.find('#team1').text()).toEqual('1')
+    expect(wrapper.find('#team2').text()).toEqual('0')
+  })
 })
