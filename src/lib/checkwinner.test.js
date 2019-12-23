@@ -4,12 +4,15 @@ describe('Check winner function', () => {
     test('Check X is a winner', () => {
         //Diagonal test case
         expect(checkWinner(['X', 'O', 'X', 'O', 'X', 'O', 'X', '', ''])['winner']).toEqual('X')
+        expect(checkWinner(['X', 'O', 'X', 'O', 'X', 'O', 'X', '', ''])['line']).toEqual([2, 4, 6])
         
         //Vertical test case
         expect(checkWinner(['X', 'O', '', 'X', 'O', '', 'X', '', ''])['winner']).toEqual('X')
+        expect(checkWinner(['X', 'O', '', 'X', 'O', '', 'X', '', ''])['line']).toEqual([0, 3, 6])
         
         //Horizontal test case
         expect(checkWinner(['X', 'X', 'X', 'O', '', 'O', '', '', ''])['winner']).toEqual('X')
+        expect(checkWinner(['X', 'X', 'X', 'O', '', 'O', '', '', ''])['line']).toEqual([0, 1, 2])
     })
 
     test('Check O is a winner', () => {
