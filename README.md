@@ -4,7 +4,7 @@
 - Prompts users for their turn, allows to rewind moves, resets once game is finished and adds score to the respective player in the ReactJS web application.
 - Run unit test cases and integration test cases in Jest and Enzyme to test components like Square, Box, Game and algorithm before pushing the code to Git.
 
-Please click the [link](https://tic-tac-toe-gap-react-challenge.netlify.com/) for project demonstration
+## Please click the [link](https://tic-tac-toe-gap-react-challenge.netlify.com/) for project demonstration
 
 ------------------------------------------------------
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
